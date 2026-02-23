@@ -9,6 +9,7 @@ int main()
 	system.Initialise();
 
 	system.Register(); // will be in menu
+	system.Login(); //will be too
 
 	return 0;
 }

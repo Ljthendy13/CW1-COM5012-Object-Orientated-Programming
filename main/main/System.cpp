@@ -23,6 +23,8 @@ void System::Initialise()
 
 void System::Register()
 {
+	cout << "~~~~~~~~~~~~~~~ REGISTER ~~~~~~~~~~~~~~~" << endl;
+
 	string usernameInp = "";
 	string passwordInp = "";
 	int createdID = 0;
@@ -79,7 +81,47 @@ void System::Register()
 
 void System::Login()
 {
-	
+	cout << "~~~~~~~~~~~~~~~ LOG IN ~~~~~~~~~~~~~~~" << endl;
+
+	string usernameInp = "";
+	string passwordInp = "";
+	User* thisUser = NULL;
+	bool loggedIn = false;
+
+
+	cout << "Please enter your username: ";
+	cin >> usernameInp;
+
+	for (User* user : nonPrivateInformation)
+	{
+		if (user->GetUsername() == usernameInp)
+		{
+			thisUser = user;
+		}
+	}
+
+	if (thisUser == NULL)
+	{
+		cout << "Account not found. Please try again.";
+		return;
+	}
+
+	while (!loggedIn)
+	{
+		cout << "Please enter your password: ";
+		cin >> passwordInp;
+
+		if (thisUser->GetPassword() == passwordInp)
+		{
+			loggedIn = true;
+		}
+		else 
+		{
+			cout << "Incorrect password entered." << endl;
+		}
+	}
+
+	cout << "Login Validated.";
 }
 
 void System::HidePrivateData()
