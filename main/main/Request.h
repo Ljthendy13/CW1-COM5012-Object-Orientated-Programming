@@ -17,7 +17,7 @@ public:
     ~Request();
     string GetType();
     string GetRequestee();
-    string GetRelatedBook();
+    Book* GetRelatedBook();
     void SetHandled(bool);
     bool GetHandled();
 };
