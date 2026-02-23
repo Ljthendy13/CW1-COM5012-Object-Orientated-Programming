@@ -2,8 +2,12 @@
 
 #include <iostream>
 #include <list>
-#include "User.h"
 #include "Book.h"
+#include "Request.h"
+#include "Rule.h"
+#include "Member.h"
+#include "Librarian.h"
+#include "Administrator.h"
 
 using namespace std;
 
