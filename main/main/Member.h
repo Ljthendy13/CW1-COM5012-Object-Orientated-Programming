@@ -13,7 +13,7 @@ private:
     int numberOfBorrowedBooks;
     list<Book*> borrowedBooks;
 public:
-    Member();
+    Member(string username, string password, int id);
     ~Member();
     void RequestBorrowBook();
     void ViewBorrowedBooks();

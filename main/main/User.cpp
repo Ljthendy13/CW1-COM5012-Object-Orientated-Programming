@@ -3,6 +3,17 @@
 
 using namespace std;
 
+User::User(string username, string password, int id)
+{
+	this->username = username;
+	this->password = password;
+	this->id = id;
+}
+
+User::~User()
+{
+}
+
 string User::GetUsername()
 {
     return username;
@@ -21,4 +32,12 @@ string User::GetPassword()
 int User::GetID()
 {
     return id;
+}
+
+void User::ChangePassword()
+{
+}
+
+void User::ViewAllBooks()
+{
 }

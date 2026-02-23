@@ -17,7 +17,6 @@ public:
     void SetPassword(string);
     string GetPassword();
     int GetID();
-    void Login();
     void ChangePassword();
     void ViewAllBooks();
 };

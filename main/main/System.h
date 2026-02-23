@@ -23,4 +23,7 @@ public:
     void SendDueAlert();
     void SendOverdueAlert();
     void SendReserveAlert();
+    void Login();
+    void Initialise();
+    void Register();
 };

@@ -5,7 +5,10 @@ using namespace std;
 
 int main() 
 {
-	
+	System system;
+	system.Initialise();
+
+	system.Register(); // will be in menu
 
 	return 0;
 }
