@@ -26,4 +26,5 @@ public:
     void Login();
     void Initialise();
     void Register();
+	list<Book*> GetListOfBooks();
 };

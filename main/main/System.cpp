@@ -157,3 +157,8 @@ void System::SendOverdueAlert()
 void System::SendReserveAlert()
 {
 }
+
+list<Book*> System::GetListOfBooks()
+{
+	return listOfBooks;
+}

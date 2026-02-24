@@ -10,10 +10,9 @@ using namespace std;
 class Librarian : public User
 {
 private:
-    list<Request*> unhandledRequests;
     string dataReport;
 public:
-    Librarian();
+	Librarian(string username, string password, int id);
     ~Librarian();
     void AddBook();
     void RemoveBook();

@@ -10,6 +10,10 @@ Book::Book(string title, string author)
 	available = true;
 }
 
+Book::~Book()
+{
+}
+
 string Book::GetTitle()
 {
 	return title;

@@ -13,7 +13,7 @@ private:
     Book* relatedBook;
     bool handled;
 public:
-    Request();
+    Request(string type, string requestee, Book* relatedBook);
     ~Request();
     string GetType();
     string GetRequestee();
