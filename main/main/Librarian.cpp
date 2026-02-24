@@ -56,7 +56,7 @@ void Librarian::AddBook()
 		return;
 	}
 
-	Book* newBook = new Book(titleInp, authorInp); //Will need to change this whole part below here to create the book in the main system, and then add it to the list of books in the system, instead of creating a new system here and adding it to that one, which will just be deleted immediately after this function ends, meaning the book will be lost.
+	Book* newBook = new Book(titleInp, authorInp); //Will need to change this whole part below here to create the book in the main system, and then add it to the list of books in the system, instead of creating a new system here and adding it to that one, which will just be deleted immediately after this function ends, meaning the book will be lost. Also currently doesn't even initialise the list.
 	tempSystem->GetListOfBooks().push_back(newBook);
 	delete tempSystem;
 	tempSystem = nullptr;
