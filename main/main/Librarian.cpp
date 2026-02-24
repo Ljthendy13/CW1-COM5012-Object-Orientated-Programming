@@ -39,8 +39,8 @@ void Librarian::AddBook()
 	cin >> authorInp;
 
 	cout << endl << "Please confirm the following information:" << endl;
-	cout << "Your username will be: " << titleInp << endl;
-	cout << "Your password will be: " << authorInp << endl;
+	cout << "This Book's Title is: " << titleInp << endl;
+	cout << "This Book's Author is: " << authorInp << endl;
 
 	char confirmationInp = ' ';
 
@@ -56,7 +56,7 @@ void Librarian::AddBook()
 		return;
 	}
 
-	Book* newBook = new Book(titleInp, authorInp);
+	Book* newBook = new Book(titleInp, authorInp); //Will need to change this whole part below here to create the book in the main system, and then add it to the list of books in the system, instead of creating a new system here and adding it to that one, which will just be deleted immediately after this function ends, meaning the book will be lost.
 	tempSystem->GetListOfBooks().push_back(newBook);
 	delete tempSystem;
 	tempSystem = nullptr;
