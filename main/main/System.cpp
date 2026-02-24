@@ -19,6 +19,24 @@ void System::Initialise()
 
 	nonPrivateInformation.push_back(defaultUser1);
 	nonPrivateInformation.push_back(defaultUser2);
+
+	Book* defaultBook1 = new Book("The Great Gatsby", "F. Scott Fitzgerald");
+	Book* defaultBook2 = new Book("To Kill a Mockingbird", "Harper Lee");
+	Book* defaultBook3 = new Book("1984", "George Orwell");
+	Book* defaultBook4 = new Book("Pride and Prejudice", "Jane Austen");
+	Book* defaultBook5 = new Book("The Catcher in the Rye", "J.D. Salinger");
+	Book* defaultBook6 = new Book("The Lord of the Rings", "J.R.R. Tolkien");
+	Book* defaultBook7 = new Book("The Hobbit", "J.R.R. Tolkien");
+	Book* defaultBook8 = new Book("The King In Yellow", "Robert W. Chambers");
+
+	listOfBooks.push_back(defaultBook1);
+	listOfBooks.push_back(defaultBook2);
+	listOfBooks.push_back(defaultBook3);
+	listOfBooks.push_back(defaultBook4);
+	listOfBooks.push_back(defaultBook5);
+	listOfBooks.push_back(defaultBook6);
+	listOfBooks.push_back(defaultBook7);
+	listOfBooks.push_back(defaultBook8);
 }
 
 void System::Register()

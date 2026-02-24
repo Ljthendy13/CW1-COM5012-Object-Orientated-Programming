@@ -3,6 +3,13 @@
 
 using namespace std;
 
+Book::Book(string title, string author)
+{
+	this->title = title;
+	this->author = author;
+	available = true;
+}
+
 string Book::GetTitle()
 {
 	return title;
