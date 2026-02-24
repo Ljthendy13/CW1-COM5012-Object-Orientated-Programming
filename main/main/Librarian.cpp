@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Librarian.h"
+#include "System.h"
 
 using namespace std;
 
@@ -11,21 +12,19 @@ Librarian::~Librarian()
 {
 }
 
-void Librarian::AddBook()
+void Librarian::AddBook(System mainSystem)
 {
 	cout << "~~~~~~~~~~~~~~~ ADD NEW BOOK ~~~~~~~~~~~~~~~" << endl;
 
 	string titleInp = "";
 	string authorInp = "";
 
-	System* tempSystem = new System;
-
 	do
 	{
 		cout << "Please enter the title of the book you would like to add: ";
 		cin >> titleInp;
 
-		for (Book* book : tempSystem->GetListOfBooks())
+		for (Book* book : mainSystem.GetListOfBooks())
 		{
 			if (book->GetTitle() == titleInp)
 			{
@@ -52,14 +51,12 @@ void Librarian::AddBook()
 
 	if (confirmationInp == 'N' || confirmationInp == 'n')
 	{
-		cout << endl << "Creation cancelled. Please start again." << endl;
+		cout << endl << "Creation cancelled." << endl;
 		return;
 	}
 
-	Book* newBook = new Book(titleInp, authorInp); //Will need to change this whole part below here to create the book in the main system, and then add it to the list of books in the system, instead of creating a new system here and adding it to that one, which will just be deleted immediately after this function ends, meaning the book will be lost. Also currently doesn't even initialise the list.
-	tempSystem->GetListOfBooks().push_back(newBook);
-	delete tempSystem;
-	tempSystem = nullptr;
+	Book* newBook = new Book(titleInp, authorInp);
+	mainSystem.GetListOfBooks().push_back(newBook);
 }
 
 void Librarian::RemoveBook()

@@ -3,7 +3,8 @@
 #include <iostream>
 #include <list>
 #include "User.h"
-#include "System.h"
+
+class System;
 
 using namespace std;
 
@@ -14,7 +15,7 @@ private:
 public:
 	Librarian(string username, string password, int id);
     ~Librarian();
-    void AddBook();
+    void AddBook(System mainSystem);
     void RemoveBook();
     void UpdateBook();
     void GenerateDataReport();
