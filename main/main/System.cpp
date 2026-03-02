@@ -1,12 +1,14 @@
 #include <iostream>
 #include <random>
+#include <chrono>
+#include <ctime>
 #include "System.h"
 
 using namespace std;
 
 System::System()
 {
-	currentUser == NULL;
+	currentUser = nullptr;
 }
 
 System::~System()
@@ -15,33 +17,30 @@ System::~System()
 
 void System::Initialise()
 {
-	Member* defaultUser1 = new Member("Steve", "Password1", 1234);
-	Member* defaultUser2 = new Member("John", "Password2", 5678);
+	nonPrivateInformation.push_back(new Member("Steve", "Password1", 1234));
+	nonPrivateInformation.push_back(new Member("John", "Password2", 5678));
+	nonPrivateInformation.push_back(new Librarian("Lucy", "Password3", 9012));
 
-	nonPrivateInformation.push_back(defaultUser1);
-	nonPrivateInformation.push_back(defaultUser2);
-
-	Book* defaultBook1 = new Book("The Great Gatsby", "F. Scott Fitzgerald");
-	Book* defaultBook2 = new Book("To Kill a Mockingbird", "Harper Lee");
-	Book* defaultBook3 = new Book("1984", "George Orwell");
-	Book* defaultBook4 = new Book("Pride and Prejudice", "Jane Austen");
-	Book* defaultBook5 = new Book("The Catcher in the Rye", "J.D. Salinger");
-	Book* defaultBook6 = new Book("The Lord of the Rings", "J.R.R. Tolkien");
-	Book* defaultBook7 = new Book("The Hobbit", "J.R.R. Tolkien");
-	Book* defaultBook8 = new Book("The King In Yellow", "Robert W. Chambers");
-
-	listOfBooks.push_back(defaultBook1);
-	listOfBooks.push_back(defaultBook2);
-	listOfBooks.push_back(defaultBook3);
-	listOfBooks.push_back(defaultBook4);
-	listOfBooks.push_back(defaultBook5);
-	listOfBooks.push_back(defaultBook6);
-	listOfBooks.push_back(defaultBook7);
-	listOfBooks.push_back(defaultBook8);
+	listOfBooks.push_back(new Book("The Great Gatsby", "F. Scott Fitzgerald"));
+	listOfBooks.push_back(new Book("To Kill a Mockingbird", "Harper Lee"));
+	listOfBooks.push_back(new Book("1984", "George Orwell"));
+	listOfBooks.push_back(new Book("Pride and Prejudice", "Jane Austen"));
+	listOfBooks.push_back(new Book("The Catcher in the Rye", "J.D. Salinger"));
+	listOfBooks.push_back(new Book("The Lord of the Rings", "J.R.R. Tolkien"));
+	listOfBooks.push_back(new Book("The Hobbit", "J.R.R. Tolkien"));
+	listOfBooks.push_back(new Book("The King In Yellow", "Robert W. Chambers"));
 }
 
 void System::Register()
 {
+	//_DEBUG
+	//_CONSOLE
+
+	time_t timestamp;
+	time(&timestamp);
+
+	cout << "It is currently " << ctime(&timestamp) << endl << endl;
+
 	cout << "~~~~~~~~~~~~~~~ REGISTER ~~~~~~~~~~~~~~~" << endl;
 
 	string usernameInp = "";
@@ -108,7 +107,6 @@ void System::Login()
 
 	string usernameInp = "";
 	string passwordInp = "";
-	User* thisUser = NULL;
 	bool loggedIn = false;
 	int passTries = 0;
 
@@ -119,11 +117,11 @@ void System::Login()
 	{
 		if (user->GetUsername() == usernameInp)
 		{
-			thisUser = user;
+			currentUser = user;
 		}
 	}
 
-	if (thisUser == NULL)
+	if (currentUser == NULL)
 	{
 		cout << "Account not found. Please try again.";
 		return;
@@ -134,7 +132,7 @@ void System::Login()
 		cout << "Please enter your password: ";
 		cin >> passwordInp;
 
-		if (thisUser->GetPassword() == passwordInp)
+		if (currentUser->GetPassword() == passwordInp)
 		{
 			loggedIn = true;
 		}
@@ -147,20 +145,31 @@ void System::Login()
 		if (passTries == 3)
 		{
 			cout << "Too many incorrect password attempts. Please try again later.";
+			delete currentUser;
+			currentUser = nullptr;
 			return;
 		}
 	}
 
 	cout << "Login Validated.";
-
-	currentUser = thisUser;
-	delete thisUser;
-	thisUser = nullptr;
 }
 
 void System::SendDueAlert()
 {
-	
+	Member* temp = dynamic_cast<Member*>(currentUser);
+
+	if (temp == nullptr)
+	{
+		return;
+	}
+
+	if (temp->GetNumberOfBorrowedBooks() != 0)
+	{
+		for (Book* book : listOfBooks)
+		{
+
+		}
+	}
 }
 
 void System::SendOverdueAlert()

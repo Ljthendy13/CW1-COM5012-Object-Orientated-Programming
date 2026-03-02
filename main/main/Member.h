@@ -15,6 +15,8 @@ private:
 public:
     Member(string username, string password, int id);
     ~Member();
+    int GetNumberOfBorrowedBooks();
+    list<Book*> GetBorrowedBooks();
     void RequestBorrowBook();
     void ViewBorrowedBooks();
     void SearchForBookTitle();

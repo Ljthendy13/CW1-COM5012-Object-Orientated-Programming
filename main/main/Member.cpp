@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Member::Member(string username, string password, int id) : User(username, password, id)
+Member::Member(string username, string password, int id) : User(username, password, id, typeOfUser)
 {
 	this->username = username;
 	this->password = password;
@@ -13,6 +13,16 @@ Member::Member(string username, string password, int id) : User(username, passwo
 
 Member::~Member()
 {
+}
+
+int Member::GetNumberOfBorrowedBooks()
+{
+	return numberOfBorrowedBooks;
+}
+
+list<Book*> Member::GetBorrowedBooks()
+{
+	return borrowedBooks;
 }
 
 void Member::RequestBorrowBook()

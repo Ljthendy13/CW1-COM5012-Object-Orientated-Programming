@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Librarian::Librarian(string username, string password, int id) : User(username, password, id)
+Librarian::Librarian(string username, string password, int id) : User(username, password, id, typeOfUser)
 {
 }
 
