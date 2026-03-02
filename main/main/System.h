@@ -16,10 +16,12 @@ class System
 private:
     list<Book*> listOfBooks;
     list<User*> nonPrivateInformation;
+    list<Request*> listOfRequests;
+    list<Rule*> listOfRules;
+    User* currentUser;
 public:
     System();
     ~System();
-    void HidePrivateData();
     void SendDueAlert();
     void SendOverdueAlert();
     void SendReserveAlert();

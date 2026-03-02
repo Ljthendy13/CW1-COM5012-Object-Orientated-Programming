@@ -6,6 +6,7 @@ using namespace std;
 
 System::System()
 {
+	currentUser == NULL;
 }
 
 System::~System()
@@ -95,6 +96,10 @@ void System::Register()
 
 	Member* newUser = new Member(usernameInp, passwordInp, createdID);
 	nonPrivateInformation.push_back(newUser);
+
+	currentUser = newUser;
+	delete newUser;
+	newUser = nullptr;
 }
 
 void System::Login()
@@ -105,7 +110,7 @@ void System::Login()
 	string passwordInp = "";
 	User* thisUser = NULL;
 	bool loggedIn = false;
-
+	int passTries = 0;
 
 	cout << "Please enter your username: ";
 	cin >> usernameInp;
@@ -124,7 +129,7 @@ void System::Login()
 		return;
 	}
 
-	while (!loggedIn)
+	while (!loggedIn && passTries < 3)
 	{
 		cout << "Please enter your password: ";
 		cin >> passwordInp;
@@ -135,19 +140,27 @@ void System::Login()
 		}
 		else 
 		{
+			passTries++;
 			cout << "Incorrect password entered." << endl;
+		}
+
+		if (passTries == 3)
+		{
+			cout << "Too many incorrect password attempts. Please try again later.";
+			return;
 		}
 	}
 
 	cout << "Login Validated.";
-}
 
-void System::HidePrivateData()
-{
+	currentUser = thisUser;
+	delete thisUser;
+	thisUser = nullptr;
 }
 
 void System::SendDueAlert()
 {
+	
 }
 
 void System::SendOverdueAlert()

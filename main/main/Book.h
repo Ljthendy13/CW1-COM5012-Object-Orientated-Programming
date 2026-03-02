@@ -10,6 +10,7 @@ private:
     string title;
     string author;
     bool available;
+    string dueDate;
 public:
     Book(string title, string author);
     ~Book();

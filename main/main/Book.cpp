@@ -8,6 +8,7 @@ Book::Book(string title, string author)
 	this->title = title;
 	this->author = author;
 	available = true;
+	dueDate = "";
 }
 
 Book::~Book()

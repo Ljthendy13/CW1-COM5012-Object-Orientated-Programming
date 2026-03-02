@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include "System.h"
 
 using namespace std;
 
@@ -10,14 +9,14 @@ class Request
 private:
     string type;
     string requestee;
-    Book* relatedBook;
+    string relatedBook;
     bool handled;
 public:
-    Request(string type, string requestee, Book* relatedBook);
+    Request(string type, string requestee, string relatedBook);
     ~Request();
     string GetType();
     string GetRequestee();
-    Book* GetRelatedBook();
+    string GetRelatedBook();
     void SetHandled(bool);
     bool GetHandled();
 };

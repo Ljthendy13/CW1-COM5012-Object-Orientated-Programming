@@ -1,13 +1,14 @@
 #include <iostream>
 #include "Request.h"
+#include "System.h"
 
 using namespace std;
 
-Request::Request(string type, string requestee, Book* relatedBoo)
+Request::Request(string type, string requestee, string relatedBoo)
 {
 	this->type = type;
 	this->requestee = requestee;
-	this->relatedBook = relatedBoo;
+	this->relatedBook = relatedBook;
 	handled = false;
 }
 
@@ -25,7 +26,7 @@ string Request::GetRequestee()
 	return requestee;
 }
 
-Book* Request::GetRelatedBook()
+string Request::GetRelatedBook()
 {
 	return relatedBook;
 }
