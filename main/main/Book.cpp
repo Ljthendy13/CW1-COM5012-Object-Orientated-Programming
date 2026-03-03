@@ -8,7 +8,7 @@ Book::Book(string title, string author)
 	this->title = title;
 	this->author = author;
 	available = true;
-	dueDate = "";
+	dueDate;
 }
 
 Book::~Book()
@@ -33,4 +33,19 @@ void Book::SetAvailability(bool availCheck)
 bool Book::GetAvailability()
 {
 	return available;
+}
+
+void Book::SetDueDate(int days)
+{
+	auto now = system_clock::now();
+	dueDate = now + hours{ days * 24 };
+}
+
+double Book::GetDueDate()
+{
+	auto now = system_clock::now();
+	
+	auto trueDue = dueDate - now;
+
+	return static_cast<double>(duration_cast<hours>(trueDue).count());
 }

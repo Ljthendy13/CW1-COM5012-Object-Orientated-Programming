@@ -8,6 +8,8 @@ int main()
 	System mainSystem;
 	mainSystem.Initialise();
 
+	mainSystem.SendDueAlert();
+
 	mainSystem.Register(); // will be in menu
 	mainSystem.Login(); //will be too
 

@@ -18,194 +18,6 @@ System::~System()
 
 void System::Initialise()
 {
-	struct tm datetime;
-
-	time_t timestamp;
-	time(&timestamp);
-
-	datetime = *localtime(&timestamp);
-
-	string currentDate = to_string(datetime.tm_mday) + "/" + to_string(datetime.tm_mon + 1) + "/" + to_string(datetime.tm_year - 100);
-
-	cout << "Current Date: " << currentDate << endl;
-
-	//below here can honestly end up as the function for setting due dates, until tomorrow when V tells me no. Also should definitally set 7 as a variable in a rule instead so the amount of time you have the book for can be changed in rules by the admin
-
-	switch (datetime.tm_mon + 1)
-	{
-	case 1:
-		cout << "It's January, so if due date pushes tm_mday over 31, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 31)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 31;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 2:
-		cout << "It's February, so if due date pushes tm_mday over 28, will reset and push this up. Unless it's a leap year, which would mean the year can be divided by 4." << endl;
-		if (floor(datetime.tm_year / 4) == datetime.tm_year / 4)
-		{
-			cout << "It's a leap year, so if due date pushes tm_mday over 29, will reset and push this up." << endl;
-			if (datetime.tm_mday + 7 > 29)
-			{
-				datetime.tm_mday = (datetime.tm_mday + 7) - 29;
-				datetime.tm_mon += 1;
-			}
-			else
-			{
-				datetime.tm_mday += 7;
-			}
-		}
-		else
-		{
-			cout << "It's not a leap year, so if due date pushes tm_mday over 28, will reset and push this up." << endl;
-			if (datetime.tm_mday + 7 > 28)
-			{
-				datetime.tm_mday = (datetime.tm_mday + 7) - 28;
-				datetime.tm_mon += 1;
-			}
-			else
-			{
-				datetime.tm_mday += 7;
-			}
-		}
-		break;
-	case 3:
-		cout << "It's March, so if due date pushes tm_mday over 31, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 31)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 31;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 4:
-		cout << "It's April, so if due date pushes tm_mday over 30, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 30)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 30;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 5:
-		cout << "It's May, so if due date pushes tm_mday over 31, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 31)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 31;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 6:
-		cout << "It's June, so if due date pushes tm_mday over 30, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 30)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 30;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 7:
-		cout << "It's July, so if due date pushes tm_mday over 31, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 31)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 31;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 8:
-		cout << "It's August, so if due date pushes tm_mday over 31, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 31)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 31;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 9:
-		cout << "It's September, so if due date pushes tm_mday over 30, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 30)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 30;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 10:
-		cout << "It's October, so if due date pushes tm_mday over 31, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 31)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 31;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 11:
-		cout << "It's November, so if due date pushes tm_mday over 30, will reset and push this up." << endl;
-		if (datetime.tm_mday + 7 > 30)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 30;
-			datetime.tm_mon += 1;
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	case 12:
-		cout << "It's December, so if due date pushes tm_mday over 31, will reset and push this back to 1, while pushing up tm_year." << endl;
-		if (datetime.tm_mday + 7 > 31)
-		{
-			datetime.tm_mday = (datetime.tm_mday + 7) - 31;
-			datetime.tm_mon += 1;
-
-			if (datetime.tm_mon > 12)
-			{
-				datetime.tm_mon = 1;
-				datetime.tm_year += 1;
-			}
-		}
-		else
-		{
-			datetime.tm_mday += 7;
-		}
-		break;
-	}
-
-	string dueDate = to_string(datetime.tm_mday) + "/" + to_string(datetime.tm_mon + 1) + "/" + to_string(datetime.tm_year - 100);
-
-	cout << "Due Date: " << dueDate << endl;
-
 	nonPrivateInformation.push_back(new Member("Steve", "Password1", 1234));
 	nonPrivateInformation.push_back(new Member("John", "Password2", 5678));
 	nonPrivateInformation.push_back(new Librarian("Lucy", "Password3", 9012));
@@ -218,6 +30,14 @@ void System::Initialise()
 	listOfBooks.push_back(new Book("The Lord of the Rings", "J.R.R. Tolkien"));
 	listOfBooks.push_back(new Book("The Hobbit", "J.R.R. Tolkien"));
 	listOfBooks.push_back(new Book("The King In Yellow", "Robert W. Chambers"));
+
+	for (User* user : nonPrivateInformation)
+	{
+		if (user->GetUsername() == "Steve")
+		{
+			//borrowBook
+		}
+	}
 }
 
 void System::Register()
@@ -348,17 +168,81 @@ void System::SendDueAlert()
 	{
 		for (Book* book : listOfBooks)
 		{
-
+			if (book->GetDueDate() > 0);
+			{
+				cout << book->GetTitle() << " is due in " << book->GetDueDate() << " hours." << endl << endl;
+			}
 		}
+
+		char confirmationInp = ' ';
+
+		do
+		{
+			cout << "Please confirm your acknowledgement (Y): ";
+			cin >> confirmationInp;
+		} 
+		while (confirmationInp != 'Y' && confirmationInp != 'y');
 	}
+
+	return;
 }
 
 void System::SendOverdueAlert()
 {
+	Member* temp = dynamic_cast<Member*>(currentUser);
+
+	if (temp == nullptr)
+	{
+		return;
+	}
+
+	if (temp->GetNumberOfBorrowedBooks() != 0)
+	{
+		for (Book* book : listOfBooks)
+		{
+			if (book->GetDueDate() <= 0);
+			{
+				cout << book->GetTitle() << " is overdue. You will not be able to borrow another book until it is returned." << endl << endl;
+			}
+		}
+
+		char confirmationInp = ' ';
+
+		do
+		{
+			cout << "Please confirm your acknowledgement (Y): ";
+			cin >> confirmationInp;
+		} while (confirmationInp != 'Y' && confirmationInp != 'y');
+	}
+
+	return;
 }
 
 void System::SendReserveAlert()
 {
+	Member* temp = dynamic_cast<Member*>(currentUser);
+
+	if (temp == nullptr)
+	{
+		return;
+	}
+
+	for (Request* request : listOfRequests)
+	{
+		if (request->GetRequestee() == temp->GetUsername())
+		{
+			for (Book* book : listOfBooks)
+			{
+				if (request->GetRelatedBook() == book->GetTitle())
+				{
+					if (book->GetAvailability() == true)
+					{
+						cout << "Your Reserved Book: " << book->GetTitle() << " was returned, and is now borrowed by you. It will be due for return on " << book->GetDueDate();
+					}
+				}
+			}
+		}
+	}
 }
 
 list<Book*> System::GetListOfBooks()
