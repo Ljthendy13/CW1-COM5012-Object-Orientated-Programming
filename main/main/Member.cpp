@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Member::Member(string username, string password, int id) : User(username, password, id, typeOfUser)
+Member::Member(string username, string password, int id) : User(username, password, id, 0)
 {
 	this->username = username;
 	this->password = password;

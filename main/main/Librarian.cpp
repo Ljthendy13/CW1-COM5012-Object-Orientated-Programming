@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Librarian::Librarian(string username, string password, int id) : User(username, password, id, typeOfUser)
+Librarian::Librarian(string username, string password, int id) : User(username, password, id, 1)
 {
 }
 
@@ -28,7 +28,7 @@ void Librarian::AddBook(System mainSystem)
 		{
 			if (book->GetTitle() == titleInp)
 			{
-				cout << "An account with this username already exists. Please choose a new username." << endl << endl;
+				cout << "An book with this title already exists. Please add a different title." << endl << endl;
 				titleInp = "";
 			}
 		}
@@ -54,9 +54,8 @@ void Librarian::AddBook(System mainSystem)
 		cout << endl << "Creation cancelled." << endl;
 		return;
 	}
-
-	Book* newBook = new Book(titleInp, authorInp);
-	mainSystem.GetListOfBooks().push_back(newBook);
+	
+	mainSystem.GetListOfBooks().push_back(new Book(titleInp, authorInp));
 }
 
 void Librarian::RemoveBook()

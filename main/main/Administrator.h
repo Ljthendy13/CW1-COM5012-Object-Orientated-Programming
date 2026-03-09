@@ -13,7 +13,7 @@ private:
     list<Rule*> currentRules;
     list<User*> systemUsers;
 public:
-    Administrator();
+    Administrator(string username, string password, int id);
     ~Administrator();
     void SetRule();
     void EditRule();
