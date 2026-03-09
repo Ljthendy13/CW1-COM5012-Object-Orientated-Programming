@@ -18,6 +18,9 @@ System::~System()
 
 void System::Initialise()
 {
+	delete currentUser;
+	currentUser = nullptr;
+
 	listOfUsers.push_back(new Member("Steve", "Password1", 1234));
 	listOfUsers.push_back(new Member("John", "Password2", 5678));
 	listOfUsers.push_back(new Librarian("Lucy", "Password3", 9012));
@@ -94,12 +97,15 @@ void System::Register()
 
 	cout << endl << "Your account has been created. Your ID is: " << createdID << endl;
 
-	Member* newUser = new Member(usernameInp, passwordInp, createdID);
-	listOfUsers.push_back(newUser);
+	listOfUsers.push_back(new Member(usernameInp, passwordInp, createdID));
 
-	currentUser = newUser;
-	delete newUser;
-	newUser = nullptr;
+	for (User* user : listOfUsers)
+	{
+		if (user->GetUsername() == usernameInp)
+		{
+			currentUser = user;
+		}
+	}
 }
 
 void System::Login()
