@@ -15,6 +15,8 @@ int main()
 
 	Librarian* librarian1 = new Librarian("Librarian1", "LibPass1", 4321); //for testing
 
+	mainSystem.GetListOfBooks(); //will be in a menu
+
 	librarian1->AddBook(mainSystem); //only available to logged in librarians, will be in a menu
 
 	return 0;

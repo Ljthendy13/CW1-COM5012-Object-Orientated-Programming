@@ -15,7 +15,7 @@ class System
 {
 private:
     list<Book*> listOfBooks;
-    list<User*> nonPrivateInformation;
+    list<User*> listOfUsers;
     list<Request*> listOfRequests;
     list<Rule*> listOfRules;
     User* currentUser;
@@ -29,4 +29,8 @@ public:
     void Initialise();
     void Register();
 	list<Book*> GetListOfBooks();
+    list<User*> GetListOfUsers();
+    list<Request*> GetListOfRequests();
+    list<Rule*> GetListOfRules();
+    void ViewAllBooks();
 };

@@ -20,5 +20,4 @@ public:
     int GetID();
     int GetTypeOfUser();
     void ChangePassword();
-    void ViewAllBooks();
 };

@@ -18,9 +18,9 @@ System::~System()
 
 void System::Initialise()
 {
-	nonPrivateInformation.push_back(new Member("Steve", "Password1", 1234));
-	nonPrivateInformation.push_back(new Member("John", "Password2", 5678));
-	nonPrivateInformation.push_back(new Librarian("Lucy", "Password3", 9012));
+	listOfUsers.push_back(new Member("Steve", "Password1", 1234));
+	listOfUsers.push_back(new Member("John", "Password2", 5678));
+	listOfUsers.push_back(new Librarian("Lucy", "Password3", 9012));
 
 	listOfBooks.push_back(new Book("The Great Gatsby", "F. Scott Fitzgerald"));
 	listOfBooks.push_back(new Book("To Kill a Mockingbird", "Harper Lee"));
@@ -31,7 +31,7 @@ void System::Initialise()
 	listOfBooks.push_back(new Book("The Hobbit", "J.R.R. Tolkien"));
 	listOfBooks.push_back(new Book("The King In Yellow", "Robert W. Chambers"));
 
-	for (User* user : nonPrivateInformation)
+	for (User* user : listOfUsers)
 	{
 		if (user->GetUsername() == "Steve")
 		{
@@ -53,7 +53,7 @@ void System::Register()
 		cout << "Please enter your username: ";
 		cin >> usernameInp;
 
-		for (User* user : nonPrivateInformation)
+		for (User* user : listOfUsers)
 		{
 			if (user->GetUsername() == usernameInp)
 			{
@@ -95,7 +95,7 @@ void System::Register()
 	cout << endl << "Your account has been created. Your ID is: " << createdID << endl;
 
 	Member* newUser = new Member(usernameInp, passwordInp, createdID);
-	nonPrivateInformation.push_back(newUser);
+	listOfUsers.push_back(newUser);
 
 	currentUser = newUser;
 	delete newUser;
@@ -114,7 +114,7 @@ void System::Login()
 	cout << "Please enter your username: ";
 	cin >> usernameInp;
 
-	for (User* user : nonPrivateInformation)
+	for (User* user : listOfUsers)
 	{
 		if (user->GetUsername() == usernameInp)
 		{
@@ -168,7 +168,7 @@ void System::SendDueAlert()
 	{
 		for (Book* book : listOfBooks)
 		{
-			if (book->GetDueDate() > 0);
+			if (book->GetDueDate() > 0)
 			{
 				cout << book->GetTitle() << " is due in " << book->GetDueDate() << " hours." << endl << endl;
 			}
@@ -200,7 +200,7 @@ void System::SendOverdueAlert()
 	{
 		for (Book* book : listOfBooks)
 		{
-			if (book->GetDueDate() <= 0);
+			if (book->GetDueDate() <= 0)
 			{
 				cout << book->GetTitle() << " is overdue. You will not be able to borrow another book until it is returned." << endl << endl;
 			}
@@ -248,4 +248,27 @@ void System::SendReserveAlert()
 list<Book*> System::GetListOfBooks()
 {
 	return listOfBooks;
+}
+
+list<User*> System::GetListOfUsers()
+{
+	return listOfUsers;
+}
+
+list<Request*> System::GetListOfRequests()
+{
+	return listOfRequests;
+}
+
+list<Rule*> System::GetListOfRules()
+{
+	return listOfRules;
+}
+
+void System::ViewAllBooks()
+{
+	for (Book* book : listOfBooks)
+	{
+		cout << "Title: " << book->GetTitle() << " | Author: " << book->GetAuthor() << " | Available: " << book->GetAvailability() << endl;
+	}
 }

@@ -43,7 +43,3 @@ int User::GetTypeOfUser()
 void User::ChangePassword()
 {
 }
-
-void User::ViewAllBooks()
-{
-}
