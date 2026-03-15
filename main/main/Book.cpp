@@ -20,9 +20,19 @@ string Book::GetTitle()
 	return title;
 }
 
+void Book::SetTitle(string titleInp)
+{
+	title = titleInp;
+}
+
 string Book::GetAuthor()
 {
 	return author;
+}
+
+void Book::SetAuthor(string authorInp)
+{
+	author = authorInp;
 }
 
 void Book::SetAvailability(bool availCheck)

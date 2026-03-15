@@ -5,6 +5,8 @@
 #include "User.h"
 #include "System.h"
 
+class System;
+
 using namespace std;
 
 class Member : public User
@@ -17,10 +19,10 @@ public:
     ~Member();
     int GetNumberOfBorrowedBooks();
     list<Book*> GetBorrowedBooks();
-    void RequestBorrowBook();
+    void RequestBorrowBook(Book* selectedBook);
     void ViewBorrowedBooks();
-    void SearchForBookTitle();
-    void SearchForBookAuthor();
-    void ReturnBook();
-    void RequestReserveBook();
+    void SearchForBookTitle(System mainSystem);
+    void SearchForBookAuthor(System mainSystem);
+    void ReturnBook(Book* selectedBook);
+    void RequestReserveBook(Book* selectedBook, System mainSystem);
 };

@@ -10,6 +10,9 @@ int main()
 
 	mainSystem.SendDueAlert();
 
+	Member* member1 = new Member("Member1", "MemPass1", 1234); //for testing
+	member1->SearchForBookAuthor(mainSystem);
+
 	mainSystem.Register(); // will be in menu
 	mainSystem.Login(); //will be too
 

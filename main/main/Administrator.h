@@ -5,19 +5,20 @@
 #include "User.h"
 #include "System.h"
 
+class System;
+
 using namespace std;
 
 class Administrator : public User
 {
 private:
-    list<Rule*> currentRules;
-    list<User*> systemUsers;
 public:
     Administrator(string username, string password, int id);
     ~Administrator();
-    void SetRule();
-    void EditRule();
-    void RemoveRule();
-    void ManageMemberData();
-    void ManageLibrarianData();
+    void SetRule(System mainSystem);
+	void ViewRules(System mainSystem);
+    void EditRule(Rule* selectedRule, System mainSystem);
+    void RemoveRule(Rule* selectedRule, System mainSystem);
+    void ManageMemberData(System mainSystem);
+    void ManageLibrarianData(System mainSystem);
 };

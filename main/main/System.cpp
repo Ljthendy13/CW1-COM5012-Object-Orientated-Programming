@@ -54,7 +54,7 @@ void System::Register()
 	do
 	{
 		cout << "Please enter your username: ";
-		cin >> usernameInp;
+		getline(cin, usernameInp);
 
 		for (User* user : listOfUsers)
 		{
@@ -68,7 +68,7 @@ void System::Register()
 	while (usernameInp == "");
 
 	cout << endl << "Please enter your password: ";
-	cin >> passwordInp;
+	getline(cin, passwordInp);
 
 	random_device rd;
 	mt19937 gen(rd());
@@ -118,7 +118,7 @@ void System::Login()
 	int passTries = 0;
 
 	cout << "Please enter your username: ";
-	cin >> usernameInp;
+	getline(cin, usernameInp);
 
 	for (User* user : listOfUsers)
 	{
@@ -137,7 +137,7 @@ void System::Login()
 	while (!loggedIn && passTries < 3)
 	{
 		cout << "Please enter your password: ";
-		cin >> passwordInp;
+		getline(cin, passwordInp);
 
 		if (currentUser->GetPassword() == passwordInp)
 		{
@@ -251,14 +251,14 @@ void System::SendReserveAlert()
 	}
 }
 
-list<Book*> System::GetListOfBooks()
-{
-	return listOfBooks;
-}
-
 list<User*> System::GetListOfUsers()
 {
 	return listOfUsers;
+}
+
+list<Book*> System::GetListOfBooks()
+{
+	return listOfBooks;
 }
 
 list<Request*> System::GetListOfRequests()
