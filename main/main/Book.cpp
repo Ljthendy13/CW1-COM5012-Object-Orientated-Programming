@@ -8,7 +8,7 @@ Book::Book(string title, string author)
 	this->title = title;
 	this->author = author;
 	available = true;
-	dueDate = system_clock::now() + hours{ 999999 };
+	dueDate = system_clock::now() + hours{ 168 };
 }
 
 Book::~Book()
