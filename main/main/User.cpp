@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "User.h"
 
 using namespace std;
@@ -46,6 +47,7 @@ void User::ChangePassword()
 
     cout << "Enter old password: ";
     cin >> oldPass;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     if (oldPass != GetPassword())
     {
@@ -55,6 +57,7 @@ void User::ChangePassword()
 
     cout << "Enter new password: ";
     cin >> newPass;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     char confirmation;
 
@@ -62,6 +65,7 @@ void User::ChangePassword()
     {
         cout << "Are you sure you want to change your password? (Y/N): ";
         cin >> confirmation;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         confirmation = toupper(confirmation);
     } 
     while (confirmation != 'Y' && confirmation != 'N');

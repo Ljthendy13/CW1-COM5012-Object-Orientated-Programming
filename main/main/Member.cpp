@@ -30,11 +30,11 @@ void Member::ViewBorrowedBooks()
 {
 	for (Book* book : borrowedBooks)
 	{
-		cout << "Title: " << book->GetTitle() << ", Author: " << book->GetAuthor() << ", Due Date: " << book->GetDueDate() << endl;
+		cout << "Title: " << book->GetTitle() << ", Author: " << book->GetAuthor() << ", Due in " << book->GetDueDate() << " hours." << endl;
 	}
 }
 
-void Member::SearchForBookTitle(System mainSystem)
+void Member::SearchForBookTitle(System& mainSystem)
 {
 	string titleInput;
 
@@ -55,7 +55,7 @@ void Member::SearchForBookTitle(System mainSystem)
 	}
 }
 
-void Member::SearchForBookAuthor(System mainSystem)
+void Member::SearchForBookAuthor(System& mainSystem)
 {
 	string authorInput;
 	bool foundAny = false;
@@ -85,18 +85,35 @@ void Member::SearchForBookAuthor(System mainSystem)
 	}
 }
 
-void Member::RequestBorrowBook(Book* selectedBook)
+void Member::BorrowBook(Book* selectedBook, System& mainSystem)
 {
-    if (numberOfBorrowedBooks >= 5) //will need to be updated to be the rule for max borrowed books
+    int borrowLimit = 5;
+    int borrowDuration = 7;
+
+    for (Rule* rule : mainSystem.GetListOfRules())
+    {
+        if (rule->GetDescription() == "Borrow Limit")
+        {
+			borrowLimit = rule->GetAssociatedValue();
+        }
+
+        if (rule->GetDescription() == "Borrow Duration")
+        {
+			borrowDuration = rule->GetAssociatedValue();
+		}
+    }
+
+    if (numberOfBorrowedBooks >= borrowLimit)
     {
         cout << "You have reached the maximum number of borrowed books. Please return a book before borrowing another." << endl;
         return;
     }
 
+    cout << selectedBook->GetTitle() << " has been borrowed. It will be due for return in " << selectedBook->GetDueDate() << " hours." << endl;
 	numberOfBorrowedBooks++;
-
+	borrowedBooks.push_back(selectedBook);
 	selectedBook->SetAvailability(false);
-	selectedBook->SetDueDate(7); //will need to be updated to be the rule for borrowing duration
+	selectedBook->SetDueDate(borrowDuration);
 }
 
 void Member::ReturnBook(Book* selectedBook)
@@ -114,7 +131,7 @@ void Member::ReturnBook(Book* selectedBook)
 	selectedBook->SetAvailability(true);
 }
 
-void Member::RequestReserveBook(Book* selectedBook, System mainSystem)
+void Member::RequestReserveBook(Book* selectedBook, System& mainSystem)
 {
-	mainSystem.GetListOfRequests().push_back(new Request("Reserve", GetUsername(), selectedBook->GetTitle()));
+	mainSystem.GetListOfRequests().push_back(new Request("Reserve", this->GetUsername(), selectedBook->GetTitle()));
 }

@@ -19,10 +19,10 @@ public:
     ~Member();
     int GetNumberOfBorrowedBooks();
     list<Book*> GetBorrowedBooks();
-    void RequestBorrowBook(Book* selectedBook);
+    void BorrowBook(Book* selectedBook, System& mainSystem);
     void ViewBorrowedBooks();
-    void SearchForBookTitle(System mainSystem);
-    void SearchForBookAuthor(System mainSystem);
+    void SearchForBookTitle(System& mainSystem);
+    void SearchForBookAuthor(System& mainSystem);
     void ReturnBook(Book* selectedBook);
-    void RequestReserveBook(Book* selectedBook, System mainSystem);
+    void RequestReserveBook(Book* selectedBook, System& mainSystem);
 };

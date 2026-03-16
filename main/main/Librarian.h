@@ -16,11 +16,11 @@ private:
 public:
 	Librarian(string username, string password, int id);
     ~Librarian();
-    void AddBook(System mainSystem);
-    void RemoveBook(Book* selectedBook, System mainSystem);
-    void UpdateBook(Book* selectedBook, System mainSystem);
-    void GenerateDataReport(System mainSystem);
+    void AddBook(System& mainSystem);
+    void RemoveBook(Book* selectedBook, System& mainSystem);
+    void UpdateBook(Book* selectedBook, System& mainSystem);
+    void GenerateDataReport(System& mainSystem);
     void PrintDataReport();
-	void ViewRequests(System mainSystem);
+	void ViewRequests(System& mainSystem);
     void HandleRequest(Request* selectedRequest);
 };

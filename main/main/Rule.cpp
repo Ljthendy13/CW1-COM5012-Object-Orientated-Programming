@@ -3,9 +3,10 @@
 
 using namespace std;
 
-Rule::Rule(string description)
+Rule::Rule(string description, int associatedValue)
 {
 	this->description = description;
+	this->associatedValue = associatedValue;
 }
 
 Rule::~Rule()

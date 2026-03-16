@@ -28,9 +28,10 @@ public:
     void Login();
     void Initialise();
     void Register();
-	list<Book*> GetListOfBooks();
-    list<User*> GetListOfUsers();
-    list<Request*> GetListOfRequests();
-    list<Rule*> GetListOfRules();
+	list<Book*>& GetListOfBooks();
+    list<User*>& GetListOfUsers();
+    list<Request*>& GetListOfRequests();
+    list<Rule*>& GetListOfRules();
     void ViewAllBooks();
+    void Menus();
 };

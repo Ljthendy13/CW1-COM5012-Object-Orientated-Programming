@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <random>
+#include <limits>
 #include "Administrator.h"
 
 using namespace std;
@@ -13,7 +14,7 @@ Administrator::~Administrator()
 {
 }
 
-void Administrator::SetRule(System mainSystem)
+void Administrator::SetRule(System& mainSystem)
 {
 	string newDescription;
 
@@ -26,6 +27,7 @@ void Administrator::SetRule(System mainSystem)
     {
         cout << "Does this rule have any associated values? (Y/N): ";
         cin >> confirmationInp;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 
     if (confirmationInp == 'N' || confirmationInp == 'n')
@@ -37,9 +39,10 @@ void Administrator::SetRule(System mainSystem)
             cout << "Is this information correct? (Y/N): ";
 			cout << newDescription << endl;
             cin >> confirmationInp;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
-        mainSystem.GetListOfRules().push_back(new Rule(newDescription));
+        mainSystem.GetListOfRules().push_back(new Rule(newDescription, 0));
         return;
 	}
 
@@ -47,6 +50,7 @@ void Administrator::SetRule(System mainSystem)
 
 	cout << "Please enter the associated value for this rule: ";
 	cin >> newValue;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     confirmationInp = ' ';
     while (confirmationInp != 'Y' && confirmationInp != 'N' && confirmationInp != 'y' && confirmationInp != 'n')
@@ -55,6 +59,7 @@ void Administrator::SetRule(System mainSystem)
         cout << newDescription << endl;
         cout << newValue << endl;
         cin >> confirmationInp;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 
     if (confirmationInp == 'N' || confirmationInp == 'n')
@@ -63,22 +68,22 @@ void Administrator::SetRule(System mainSystem)
         return;
 	}
 
-    mainSystem.GetListOfRules().push_back(new Rule(newDescription));
+    mainSystem.GetListOfRules().push_back(new Rule(newDescription, newValue));
 }
 
-void Administrator::ViewRules(System mainSystem)
+void Administrator::ViewRules(System& mainSystem)
 {
     for (Rule* rule : mainSystem.GetListOfRules())
     {
-        cout << rule->GetDescription();
+        cout << "Description: " << rule->GetDescription();
         if (rule->GetAssociatedValue() != NULL)
         {
-            cout << " Associated Value: " << rule->GetAssociatedValue() << endl;
+            cout << ", Associated Value: " << rule->GetAssociatedValue() << endl;
         }
 	}
 }
 
-void Administrator::EditRule(Rule* selectedRule, System mainSystem)
+void Administrator::EditRule(Rule* selectedRule, System& mainSystem)
 {
 	int choiceInput;
 	string descriptionInput;
@@ -86,6 +91,7 @@ void Administrator::EditRule(Rule* selectedRule, System mainSystem)
 
 	cout << "Would you like to edit the description or associated value of this rule? (1/2): ";
 	cin >> choiceInput;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     if (choiceInput == 1)
     {
@@ -103,6 +109,7 @@ void Administrator::EditRule(Rule* selectedRule, System mainSystem)
     {
         cout << "What would you like to change the associated value to? ";
         cin >> valueInput;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         for (Rule* rule : mainSystem.GetListOfRules())
         {
             if (rule->GetDescription() == selectedRule->GetDescription())
@@ -118,17 +125,18 @@ void Administrator::EditRule(Rule* selectedRule, System mainSystem)
 	}
 }
 
-void Administrator::RemoveRule(Rule* selectedRule, System mainSystem)
+void Administrator::RemoveRule(Rule* selectedRule, System& mainSystem)
 {
     mainSystem.GetListOfRules().remove(selectedRule);
 }
 
-void Administrator::ManageMemberData(System mainSystem)
+void Administrator::ManageMemberData(System& mainSystem)
 {
 	int choiceInput;
 
 	cout << "Would you like to view members or remove members? (1/2): ";
 	cin >> choiceInput;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     for (User* user : mainSystem.GetListOfUsers())
     {
@@ -144,6 +152,7 @@ void Administrator::ManageMemberData(System mainSystem)
 
         cout << "Please enter the ID of the member you would like to remove: ";
         cin >> selectedID;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         for (User* user : mainSystem.GetListOfUsers())
         {
@@ -159,6 +168,7 @@ void Administrator::ManageMemberData(System mainSystem)
         {
             cout << "Are you sure you want to remove this member? (Y/N): ";
             cin >> confirmationInp;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
         if (confirmationInp == 'N' || confirmationInp == 'n')
@@ -177,22 +187,25 @@ void Administrator::ManageMemberData(System mainSystem)
     }
 }
 
-void Administrator::ManageLibrarianData(System mainSystem)
+void Administrator::ManageLibrarianData(System& mainSystem)
 {
 	int choiceInput;
 
 	cout << "Would you like to view librarians, add librarians or remove librarians? (1/2/3): ";
 	cin >> choiceInput;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    for (User* user : mainSystem.GetListOfUsers())
+    if (choiceInput == 1)
     {
-        if (user->GetTypeOfUser() == 1)
+        for (User* user : mainSystem.GetListOfUsers())
         {
-            cout << "Username: " << user->GetUsername() << " ID: " << user->GetID() << endl;
+            if (user->GetTypeOfUser() == 1)
+            {
+                cout << "Username: " << user->GetUsername() << ", ID: " << user->GetID() << endl;
+            }
         }
     }
-
-    if (choiceInput == 2)
+    else if (choiceInput == 2)
     {
         string usernameInput;
         string passwordInput;
@@ -232,6 +245,7 @@ void Administrator::ManageLibrarianData(System mainSystem)
         {
             cout << endl << "Is this information correct? (Y/N): ";
             cin >> confirmationInp;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
         if (confirmationInp == 'N' || confirmationInp == 'n')
@@ -242,4 +256,46 @@ void Administrator::ManageLibrarianData(System mainSystem)
 
         mainSystem.GetListOfUsers().push_back(new Librarian(usernameInput, passwordInput, id));
 	}
+    else if (choiceInput == 3)
+    {
+        for (User* user : mainSystem.GetListOfUsers())
+        {
+            if (user->GetTypeOfUser() == 1)
+            {
+                cout << "Username: " << user->GetUsername() << ", ID: " << user->GetID() << endl;
+            }
+        }
+
+        int selectedID;
+        cout << "Please enter the ID of the librarian you would like to remove: ";
+        cin >> selectedID;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        for (User* user : mainSystem.GetListOfUsers())
+        {
+            if (user->GetID() == selectedID)
+            {
+                cout << "Username: " << user->GetUsername() << ", ID: " << user->GetID() << " selected." << endl;
+            }
+        }
+        char confirmationInp = ' ';
+        while (confirmationInp != 'Y' && confirmationInp != 'N' && confirmationInp != 'y' && confirmationInp != 'n')
+        {
+            cout << "Are you sure you want to remove this librarian? (Y/N): ";
+            cin >> confirmationInp;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        if (confirmationInp == 'N' || confirmationInp == 'n')
+        {
+            cout << "Deletion cancelled." << endl;
+            return;
+        }
+
+        for (User* user : mainSystem.GetListOfUsers())
+        {
+            if (user->GetID() == selectedID)
+            {
+                mainSystem.GetListOfUsers().remove(user);
+            }
+		}
+    }
 }

@@ -10,7 +10,7 @@ private:
     string description;
     int associatedValue;
 public:
-    Rule(string description);
+    Rule(string description, int associatedValue); //0 for null
     ~Rule();
     string GetDescription();
 	void SetDescription(string newDescription);

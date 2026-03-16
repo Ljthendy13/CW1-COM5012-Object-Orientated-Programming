@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>
 #include "Librarian.h"
 #include "System.h"
 
@@ -13,7 +14,7 @@ Librarian::~Librarian()
 {
 }
 
-void Librarian::AddBook(System mainSystem)
+void Librarian::AddBook(System& mainSystem)
 {
 	cout << "~~~~~~~~~~~~~~~ ADD NEW BOOK ~~~~~~~~~~~~~~~" << endl;
 
@@ -49,6 +50,7 @@ void Librarian::AddBook(System mainSystem)
 	{
 		cout << endl << "Is this information correct? (Y/N): ";
 		cin >> confirmationInp;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 
 	if (confirmationInp == 'N' || confirmationInp == 'n')
@@ -60,18 +62,19 @@ void Librarian::AddBook(System mainSystem)
 	mainSystem.GetListOfBooks().push_back(new Book(titleInp, authorInp));
 }
 
-void Librarian::RemoveBook(Book* selectedBook, System mainSystem)
+void Librarian::RemoveBook(Book* selectedBook, System& mainSystem)
 {
 	mainSystem.GetListOfBooks().remove(selectedBook);
 }
 
-void Librarian::UpdateBook(Book* selectedBook, System mainSystem)
+void Librarian::UpdateBook(Book* selectedBook, System& mainSystem)
 {
 	int choiceInput;
 	string titleInput, authorInput;
 
 	cout << "Would you like to change the title or author of this book? (1/2): ";
 	cin >> choiceInput;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	if (choiceInput == 1)
 	{
@@ -104,7 +107,7 @@ void Librarian::UpdateBook(Book* selectedBook, System mainSystem)
 	}
 }
 
-void Librarian::GenerateDataReport(System mainSystem)
+void Librarian::GenerateDataReport(System& mainSystem)
 {
 	dataReport.clear();
 
@@ -125,7 +128,7 @@ void Librarian::PrintDataReport()
 	}
 }
 
-void Librarian::ViewRequests(System mainSystem)
+void Librarian::ViewRequests(System& mainSystem)
 {
 	for (Request* request : mainSystem.GetListOfRequests())
 	{

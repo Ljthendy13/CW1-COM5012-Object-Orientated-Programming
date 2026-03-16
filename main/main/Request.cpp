@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Request::Request(string type, string requestee, string relatedBoo)
+Request::Request(string type, string requestee, string relatedBook)
 {
 	this->type = type;
 	this->requestee = requestee;
