@@ -38,6 +38,15 @@ void System::Initialise()
 
 	listOfRules.push_back(new Rule("Borrow Limit", 5));
 	listOfRules.push_back(new Rule("Borrow Duration", 7));
+
+	/* store user steve in a temp variable, then assign a few books to him, at least two should be overdue*/
+
+	Member* temp = dynamic_cast<Member*>(listOfUsers.front());
+
+	temp->BorrowBook(listOfBooks.front(), *this);
+	temp->BorrowBook(listOfBooks.back(), *this); //make this book overdue by setting its due date to a past time
+
+	listOfBooks.back()->SetDueDate(-1);
 }
 
 void System::Register()
@@ -296,6 +305,7 @@ void System::ViewAllBooks()
 
 void System::Menus()
 {
+	system("CLS");
 	int choice = NULL;
 	bool loggedIn = (currentUser != nullptr);
 
